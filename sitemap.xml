@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- الصفحة العربية -->
+  <!-- پەڕەی کوردی -->
   <url>
-    <loc>https://mohtarefps2.github.io/mohtaref_ps2_cover_art_OPL/</loc>
+    <loc>https://jackkurd.github.io/Games-ART/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- الصفحة الإنجليزية -->
+  <!-- پەڕەی ئینگلیزی -->
   <url>
-    <loc>https://mohtarefps2.github.io/mohtaref_ps2_cover_art_OPL/en/index.html</loc>
+    <loc>https://jackkurd.github.io/Games-ART/en/index.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>

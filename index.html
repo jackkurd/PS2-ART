@@ -1,317 +1,1087 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ckb" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقع محترف PS2 لتحميل صور ART الالعاب بكل سهولة</title>
-    <meta name="description" content="موقع عربي متخصص لتحميل أغلفة وأعمال فنية (ART) لألعاب بلايستيشن 1 وبلايستيشن 2. ابحث بسهولة باستخدام معرف اللعبة واحصل على حزم صور ZIP جاهزة للاستخدام مع OPL وغيرها.">
-    <meta name="robots" content="index, follow">
+    <title>PS2 ART</title>
+    <meta name="description" content="ماڵپەڕێکی تایبەت بۆ داگرتنی وێنە و کاری هونەری یاریەکانی پلەی‌ستەیشن">
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
     <style>
-        body {
-            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #000000;
-            color: #c8c8c8;
-            text-align: center;
-            line-height: 1.7;
-        }
-        #page-container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            background-color: #1a1a1a;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
-            box-sizing: border-box;
-        }
-        h1 {
-            color: #33A1FF;
-            margin-bottom: 20px;
-            font-size: clamp(1.8em, 5vw, 2.5em);
-            word-break: break-word;
-            hyphens: auto;
-        }
-        h1 .highlight-red {
-            color: #ff3333;
-            white-space: nowrap;
-        }
-        .site-description {
-            text-align: right;
-            margin-top: 25px;
-            margin-bottom: 25px;
-            padding: 15px;
-            background-color: #262626;
-            border-radius: 5px;
-        }
-        .site-description h3 {
-            color: #E0E0E0;
-            margin-top: 0;
-            font-size: 1.4em;
-        }
-        .site-description p, .site-description li {
-            font-size: 1.08em;
-            color: #c8c8c8;
-        }
-        .site-description ul {
-            list-style-type: none;
-            padding-right: 0;
-        }
-        .site-description li {
-            margin-bottom: 5px;
-        }
-        .site-description ul ul {
-            padding-right: 20px;
-            margin-top: 5px;
-        }
-        .site-description .game-id-example-container {
-            text-align: center;
-            margin: 20px auto;
-            max-width: 100%;
-        }
-        .site-description .game-id-example-container img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.4);
-            margin-bottom: 10px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .site-description .highlight-id-text {
-            color: #FFFF00;
-            font-weight: bold;
-            font-size: 1em;
-            text-shadow: 0 0 5px rgba(255,255,0,0.5);
-            display: block;
-            margin-top: 15px;
-        }
-        .instructions {
-            text-align: right;
-            margin-top: 30px;
-            margin-bottom: 25px;
-            padding: 15px;
-            background-color: #262626;
-            border-radius: 5px;
-        }
-        .instructions h3 {
-            color: #E0E0E0;
-            margin-top: 0;
-            font-size: 1.4em;
-        }
-        .instructions ol {
-            padding-right: 20px;
-        }
-        .instructions p, .instructions li {
-            font-size: 1.15em;
-            color: #c8c8c8;
-            margin-bottom: 10px;
-        }
-        a {
-            color: #58a6ff;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        a:hover {
-            color: #82c0ff;
-            text-decoration: underline;
-        }
-        #search-area {
-            margin-bottom: 20px;
-        }
-        
-        #gameIdInput {
-            padding: 12px;
-            border: 1px solid #444;
-            border-radius: 4px;
-            width: 100%;
-            max-width: 450px;
-            box-sizing: border-box;
-            background-color: #333333;
-            color: #ffffff;
-            font-size: 1.05em;
-            display: block;
-            margin: 0 auto 15px auto;
-            resize: none;
-            overflow-y: hidden;
-            text-align: center;
-            line-height: 1.5;
+        :root {
+            --primary: #0A84FF;
+            --secondary: #5E5CE6;
+            --success: #32D74B;
+            --danger: #FF453A;
+            --warning: #FF9F0A;
+            --purple: #BF5AF2;
+            --pink: #FF2D55;
+            --teal: #64D2FF;
+            --indigo: #5856D6;
+            
+            --glass-bg: rgba(30, 30, 32, 0.72);
+            --glass-border: rgba(255, 255, 255, 0.125);
+            --text-primary: #FFFFFF;
+            --text-secondary: #E5E5EA;
+            --text-tertiary: #AEAEB2;
         }
 
-        #search-area button {
-            padding: 12px 25px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-size: 1.05em;
-            display: block;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000000;
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--primary), transparent);
+            top: -10%;
+            right: -10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--purple), transparent);
+            bottom: -10%;
+            left: -5%;
+            animation-delay: 5s;
+        }
+
+        .orb-3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, var(--teal), transparent);
+            top: 40%;
+            left: 30%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(50px, -50px) scale(1.1);
+            }
+            50% {
+                transform: translate(-30px, 50px) scale(0.9);
+            }
+            75% {
+                transform: translate(-50px, -30px) scale(1.05);
+            }
+        }
+
+        /* Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat 15s linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(0) translateX(0);
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) translateX(50px);
+            }
+        }
+
+        #page-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 40px 24px 80px;
         }
-        #search-area button:hover {
-            background-color: #0056b3;
+
+        /* Header with 3D effect */
+        .hero-section {
+            text-align: center;
+            margin-bottom: 60px;
+            perspective: 1000px;
         }
-        #status-messages {
-            margin-top: 20px;
-            min-height: 25px;
-            font-size: 1.15em;
+
+        .logo-wrapper {
+            display: inline-block;
+            margin-bottom: 30px;
+            animation: fadeInScale 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        .error { color: #ff6666; }
-        .loading { color: #f0f0f0; }
-        .success { color: #66ff66; }
-        #results {
-            margin-top: 25px;
+
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) rotateY(180deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotateY(0deg);
+            }
+        }
+
+        .logo-3d {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--purple) 100%);
+            border-radius: 28px;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-        #results a.download-link {
-            display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 10px 15px;
-            background-color: #007bff;
+            font-size: 60px;
             color: white;
-            border-radius: 4px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate3d 8s ease-in-out infinite;
+            box-shadow: 
+                0 20px 60px rgba(10, 132, 255, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .logo-3d::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, var(--teal), var(--pink));
+            border-radius: 30px;
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0.6;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes rotate3d {
+            0%, 100% {
+                transform: rotateY(0deg) rotateX(0deg);
+            }
+            25% {
+                transform: rotateY(10deg) rotateX(5deg);
+            }
+            50% {
+                transform: rotateY(0deg) rotateX(10deg);
+            }
+            75% {
+                transform: rotateY(-10deg) rotateX(5deg);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
+        }
+
+        .hero-title {
+            font-size: clamp(2em, 6vw, 3.5em);
+            font-weight: 900;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--primary), var(--teal), var(--purple));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientFlow 5s ease infinite, fadeInUp 0.8s ease 0.2s both;
+            letter-spacing: -1px;
+        }
+
+        @keyframes gradientFlow {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.3em;
+            color: var(--text-secondary);
+            font-weight: 500;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        /* Premium Glass Card */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            padding: 32px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            animation: slideInUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 30px 80px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .glass-card:hover::before {
+            left: 100%;
+        }
+
+        /* Premium Button */
+        .premium-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 36px;
+            background: linear-gradient(135deg, var(--success) 0%, #28a745 100%);
+            color: white;
+            border: none;
+            border-radius: 18px;
+            font-size: 1.15em;
+            font-weight: 700;
+            font-family: 'Tajawal', sans-serif;
             text-decoration: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 12px 32px rgba(50, 215, 75, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        .premium-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .premium-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .premium-btn:hover {
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 
+                0 20px 50px rgba(50, 215, 75, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.2);
+        }
+
+        .premium-btn:active {
+            transform: translateY(-3px) scale(1.02);
+        }
+
+        .premium-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Section Header with animation */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 28px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--purple));
+            animation: expandWidth 1s ease forwards;
+        }
+
+        @keyframes expandWidth {
+            from { width: 0; }
+            to { width: 100px; }
+        }
+
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            box-shadow: 0 8px 20px rgba(10, 132, 255, 0.3);
+            animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0) rotate(-180deg);
+            }
+            50% {
+                transform: scale(1.2) rotate(10deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .section-title {
+            font-size: 1.6em;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        /* Social Links with hover effect */
+        .social-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .social-item {
+            display: block;
+            padding: 18px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
             font-size: 1.05em;
-            min-width: 250px;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .social-item:hover::before {
+            left: 100%;
+        }
+
+        .social-item:hover {
+            transform: translateX(-8px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--primary);
+            box-shadow: 0 8px 24px rgba(10, 132, 255, 0.2);
+        }
+
+        .social-item i {
+            margin-left: 12px;
+            font-size: 1.3em;
+            transition: transform 0.3s ease;
+        }
+
+        .social-item:hover i {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .youtube-link i { color: #FF0000; }
+        .telegram-link i { color: #0088cc; }
+        .tiktok-link i { color: #00f2ea; }
+
+        .nested-links {
+            margin-top: 16px;
+            padding-right: 24px;
+        }
+
+        /* Image Container */
+        .image-showcase {
+            text-align: center;
+            padding: 32px;
+            background: linear-gradient(135deg, rgba(10, 132, 255, 0.1), rgba(191, 90, 242, 0.1));
+            border-radius: 20px;
+            margin: 28px 0;
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-showcase::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .image-showcase img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .image-showcase img:hover {
+            transform: scale(1.02) translateY(-5px);
+        }
+
+        .highlight-badge {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, var(--warning), var(--danger));
+            color: white;
+            font-weight: 800;
+            font-size: 1.15em;
+            border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(255, 159, 10, 0.4);
+            animation: bounce 2s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Info Box */
+        .info-box {
+            padding: 24px;
+            background: linear-gradient(135deg, rgba(50, 215, 75, 0.15), rgba(52, 199, 89, 0.1));
+            border: 2px solid rgba(50, 215, 75, 0.3);
+            border-radius: 18px;
+            color: var(--success);
+            font-weight: 700;
+            font-size: 1.15em;
+            text-align: center;
+            margin: 28px 0;
+            box-shadow: 0 8px 24px rgba(50, 215, 75, 0.2);
+            animation: fadeInUp 0.8s ease both;
+        }
+
+        /* Search Area */
+        .search-box {
+            position: relative;
+        }
+
+        #gameIdInput {
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto 24px;
+            display: block;
+            padding: 20px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 18px;
+            color: var(--text-primary);
+            font-size: 1.15em;
+            font-family: 'Tajawal', sans-serif;
+            text-align: center;
+            resize: none;
+            overflow-y: hidden;
+            transition: all 0.3s ease;
+        }
+
+        #gameIdInput:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 4px rgba(10, 132, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        #gameIdInput::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .search-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 48px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            border-radius: 18px;
+            font-size: 1.2em;
+            font-weight: 700;
+            font-family: 'Tajawal', sans-serif;
+            cursor: pointer;
+            box-shadow: 
+                0 12px 32px rgba(10, 132, 255, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .search-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.5s ease;
+        }
+
+        .search-btn:hover::before {
+            left: 100%;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 
+                0 20px 50px rgba(10, 132, 255, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.2);
+        }
+
+        .search-btn:active {
+            transform: translateY(-3px) scale(1.02);
+        }
+
+        /* Status Messages */
+        #status-messages {
+            margin: 28px 0;
+            min-height: 50px;
             text-align: center;
         }
-        #results a.download-link:hover {
-            background-color: #0056b3;
+
+        .message-badge {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 1.05em;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .error {
+            background: rgba(255, 69, 58, 0.15);
+            color: var(--danger);
+            border: 2px solid rgba(255, 69, 58, 0.3);
+        }
+
+        .loading {
+            background: rgba(10, 132, 255, 0.15);
+            color: var(--primary);
+            border: 2px solid rgba(10, 132, 255, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .success {
+            background: rgba(50, 215, 75, 0.15);
+            color: var(--success);
+            border: 2px solid rgba(50, 215, 75, 0.3);
+        }
+
+        /* Results */
+        #results {
+            display: grid;
+            gap: 16px;
+            margin-top: 28px;
+        }
+
+        .download-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            padding: 20px 28px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1em;
+            box-shadow: 0 8px 24px rgba(10, 132, 255, 0.3);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+            animation: slideInRight 0.5s ease both;
         }
-        .site-description .copyright-text {
-            margin-top: 20px;
-            font-size: 0.9em;
-            color: #888888;
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
-        i.fas, i.fab {
-            margin-left: 8px;
+
+        .download-link::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s ease, height 0.5s ease;
         }
-        a > i, button > i {
-            margin-right: 0;
+
+        .download-link:hover::before {
+            width: 400px;
+            height: 400px;
         }
+
+        .download-link:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 16px 40px rgba(10, 132, 255, 0.4);
+        }
+
+        .download-link i,
+        .download-link span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Instructions */
+        .instructions-list {
+            list-style: none;
+            counter-reset: step;
+            padding: 0;
+        }
+
+        .instruction-item {
+            counter-increment: step;
+            position: relative;
+            padding: 20px 24px 20px 70px;
+            margin-bottom: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            color: var(--text-secondary);
+            font-size: 1.05em;
+            line-height: 1.8;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.5s ease both;
+        }
+
+        .instruction-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--primary);
+            transform: translateX(-8px);
+            box-shadow: 0 8px 24px rgba(10, 132, 255, 0.2);
+        }
+
+        .instruction-item::before {
+            content: counter(step);
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 900;
+            font-size: 1.1em;
+            box-shadow: 0 4px 12px rgba(10, 132, 255, 0.3);
+        }
+
+        .instruction-item b {
+            color: var(--text-primary);
+            font-weight: 800;
+        }
+
+        /* Copyright */
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-tertiary);
+            font-size: 0.95em;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            #page-container {
+                padding: 24px 16px 60px;
+            }
+
+            .glass-card {
+                padding: 24px;
+                border-radius: 24px;
+            }
+
+            .hero-title {
+                font-size: 2em;
+            }
+
+            .logo-3d {
+                width: 100px;
+                height: 100px;
+                font-size: 50px;
+            }
+
+            .premium-btn,
+            .search-btn {
+                padding: 16px 32px;
+                font-size: 1em;
+            }
+
+            .instruction-item {
+                padding: 18px 20px 18px 64px;
+            }
+
+            .instruction-item::before {
+                width: 36px;
+                height: 36px;
+                font-size: 1em;
+            }
+        }
+
+        /* Stagger animation delays */
+        .glass-card:nth-child(1) { animation-delay: 0.1s; }
+        .glass-card:nth-child(2) { animation-delay: 0.2s; }
+        .glass-card:nth-child(3) { animation-delay: 0.3s; }
+        .glass-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .instruction-item:nth-child(1) { animation-delay: 0.1s; }
+        .instruction-item:nth-child(2) { animation-delay: 0.2s; }
+        .instruction-item:nth-child(3) { animation-delay: 0.3s; }
+        .instruction-item:nth-child(4) { animation-delay: 0.4s; }
+        .instruction-item:nth-child(5) { animation-delay: 0.5s; }
+
+        .download-link:nth-child(1) { animation-delay: 0.1s; }
+        .download-link:nth-child(2) { animation-delay: 0.2s; }
+        .download-link:nth-child(3) { animation-delay: 0.3s; }
     </style>
 </head>
 <body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Particles -->
+    <div class="particles" id="particles"></div>
+
     <div id="page-container">
-        <h1><i class="fas fa-gamepad"></i>موقع <span class="highlight-red">محترف PS2</span> لتحميل صور ART الالعاب بكل سهولة</h1>
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="logo-wrapper">
+                <div class="logo-3d">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+            </div>
+            <h1 class="hero-title">ماڵپەڕی پسپۆڕی PS2</h1>
+            <p class="hero-subtitle">داگرتنی وێنەی یاریەکان بە ئاسانی و خێرایی</p>
+        </div>
 
-        <a href="./changer.html" style="display: inline-block; background-color: #28a745; color: white; padding: 12px 30px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 1.1em; margin-bottom: 30px; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#218838'" onmouseout="this.style.backgroundColor='#28a745'"><i class="fas fa-retweet"></i> اداة تغيير ايدي ID الصور</a>
+        <!-- Quick Action -->
+        <div style="text-align: center; margin-bottom: 40px;">
+            <a href="./changer.html" class="premium-btn">
+                <i class="fas fa-magic"></i>
+                <span>ئامرازی گۆڕینی ناسنامە</span>
+            </a>
+        </div>
 
-        <div class="site-description">
-            <h3><i class="fas fa-satellite-dish"></i>تابعنا وكن على اطلاع:</h3>
-            <ul>
-                <li><a href="https://youtube.com/@mohtaref_ps2?si=0z4x36S8ylMKzEDc" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i>اشترك الان في قناة اليوتيوب ❤️</a></li>
-                <li>انضم معنا في:
-                    <ul>
-                        <li>1-<a href="https://t.me/mohtaref_ps2_1" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i>قناة التيليكرام</a></li>
-                        <li>2-<a href="https://t.me/mohtaref_ps2_3/788" target="_blank" rel="noopener noreferrer"><i class="fas fa-users"></i>⁦منتدى المتابعين للحل السريع</a></li>
-                        <li>3-<a href="https://t.me/mohtaref_ps2_3" target="_blank" rel="noopener noreferrer"><i class="fas fa-comments"></i>مجموعة الموضوعات</a></li>
-                        <li>4-<a href="https://t.me/mohtaref_ps2_3" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i>قناة التيك توك</a></li>
-                    </ul>
-                </li>
-            </ul>
-
-            <div class="game-id-example-container">
-                <img src="a.png" alt="مثال على موقع Game ID في OPL">
-                <p><span class="highlight-id-text">🌟هنا تجد ID اللعبة الخاص بك🌟</span></p>
+        <!-- Social Section -->
+        <div class="glass-card">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-satellite-dish"></i>
+                </div>
+                <h3 class="section-title">شوێنمان بکەوە و ئاگادار بە</h3>
             </div>
             
-            <p style="color: #33FFC4; font-weight: bold; font-size: 1.15em; margin-top: 25px; margin-bottom: 25px; text-shadow: 0 0 7px rgba(51, 255, 196, 0.5);">
-            📌 الموقع يحتوي على مكتبة ضخمة لصور العاب البلاي ستيشن 2 و البلاي ستيشن 1 فقط حمل الصور و استمتع
-            </p>
+            <div class="social-grid">
+                <a href="https://youtube.com/@j4ck_721s?si=7tAqN8qobUvT_kQy" target="_blank" class="social-item youtube-link">
+                    <i class="fab fa-youtube"></i>
+                    ئێستا بەشداری کەناڵی یوتیوب بکە ❤️
+                </a>
 
-           <p class="copyright-text">جميع الحقوق محفوظة لموقع محترف PS2.</p>
+                <div style="padding: 8px 0;">
+                    <p style="color: var(--text-secondary); font-weight: 600; margin-bottom: 12px;">پێوەمان بن لە:</p>
+                    <div class="nested-links social-grid">
+                        <a href="https://t.me/JACK_721_MOD" target="_blank" class="social-item telegram-link">
+                            <i class="fab fa-telegram"></i>
+                            کەناڵی تێلێگرام
+                        </a>
+                        <a href="https://t.me/j4ck_721s" target="_blank" class="social-item telegram-link">
+                            <i class="fab fa-telegram"></i>
+                            ئەکاوەنتی تێلێگرام
+                        </a>
+                        <a href="https://www.tiktok.com/@j4ck_721_official?_r=1&_t=ZS-93gRuiz3odW" target="_blank" class="social-item tiktok-link">
+                            <i class="fab fa-tiktok"></i>
+                            کەناڵی تیک تۆک
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="image-showcase">
+                <img src="a.png" alt="نموونەی شوێنی ناسنامەی یاری">
+                <div class="highlight-badge">
+                    ⭐ لێرە ناسنامەی یارییەکەت دەدۆزیتەوە ⭐
+                </div>
+            </div>
+
+            <div class="info-box">
+                📌 کتێبخانەیەکی گەورە بۆ وێنەکانی PS2 و PS1 - تەنها دایبگرە و چێژ وەرگرە
+            </div>
+
+            <div class="copyright">
+                هەموو مافەکان پارێزراون بۆ ماڵپەڕی پسپۆڕی PS2
+            </div>
         </div>
 
-        <div id="search-area">
-            <textarea id="gameIdInput" rows="1" placeholder="أدخل ID واحد في كل سطر..."></textarea>
-            <button onclick="searchArchives()"><i class="fas fa-search"></i>بحث</button>
+        <!-- Search Section -->
+        <div class="glass-card">
+            <div class="search-box">
+                <textarea 
+                    id="gameIdInput" 
+                    rows="1" 
+                    placeholder="ناسنامەی یاری لێرە بنووسە... (هەر ناسنامەیەک لە هێڵێکی جیا)"
+                ></textarea>
+                <div style="text-align: center;">
+                    <button onclick="searchArchives()" class="search-btn">
+                        <i class="fas fa-search"></i>
+                        <span>گەڕان</span>
+                    </button>
+                </div>
+            </div>
         </div>
 
-        <div id="status-messages">
-            <p id="message-area" class="loading" style="display:none;"> </p>
-         </div>
+        <div id="status-messages"></div>
 
-        <div id="results">
-        </div>
+        <div id="results"></div>
 
-        <div class="instructions">
-             <h3><i class="fas fa-info-circle"></i>طريقة استخدام الموقع:</h3>
-            <ol>
-                <li>قم بكتابة "معرف اللعبة" (Game ID) في مربع البحث.</li>
-                <li><b>للبحث المتعدد:</b> اكتب كل ID في سطر جديد.</li>
-                <li>اضغط على زر "بحث".</li>
-                <li>إذا تم العثور على نتائج، ستظهر لك روابط التحميل.</li>
-                <li>انقر على الرابط لتحميل ملف ZIP الخاص باللعبة.</li>
+        <!-- Instructions -->
+        <div class="glass-card">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <h3 class="section-title">ڕێنمایی بەکارهێنان</h3>
+            </div>
+            
+            <ol class="instructions-list">
+                <li class="instruction-item">
+                    ناسنامەی یاری (Game ID) لە خانەی گەڕان بنووسە
+                </li>
+                <li class="instruction-item">
+                    <b>بۆ چەند یاریەک:</b> هەر ناسنامەیەک لە هێڵێکی نوێ بنووسە
+                </li>
+                <li class="instruction-item">
+                    کرتە لەسەر دوگمەی "گەڕان" بکە
+                </li>
+                <li class="instruction-item">
+                    ئەگەر ئەنجام دۆزرایەوە، بەستەرەکانی داگرتن دەردەکەون
+                </li>
+                <li class="instruction-item">
+                    کرتە لەسەر بەستەر بکە بۆ داگرتنی فایلی ZIP
+                </li>
             </ol>
         </div>
     </div>
 
     <script>
+        // Create floating particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
         let allGameArchives = [];
         const gameIdInput = document.getElementById('gameIdInput');
         const resultsDiv = document.getElementById('results');
-        const messageArea = document.getElementById('message-area');
-        
+        const statusMessages = document.getElementById('status-messages');
         const zipArchivesBaseUrl = './ps2_covers/';
 
+        function showMessage(message, type = 'info') {
+            const badge = document.createElement('div');
+            badge.className = `message-badge ${type}`;
+            badge.textContent = message;
+            statusMessages.innerHTML = '';
+            statusMessages.appendChild(badge);
+        }
+
         window.onload = async function() {
-            showMessage('جاري تحميل قائمة الأرشيفات...', 'loading');
+            showMessage('لیستی ئەرشیفەکان دادەگیرێت...', 'loading');
             try {
                 const response = await fetch('./ps2_covers.json');
                 if (!response.ok) {
-                    throw new Error(`خطأ في تحميل ملف JSON: ${response.status} ${response.statusText}`);
+                    throw new Error(`هەڵە لە داگرتن: ${response.status}`);
                 }
                 allGameArchives = await response.json();
                 if (!Array.isArray(allGameArchives)) {
-                    throw new Error('ملف JSON لا يحتوي على مصفوفة (array) صحيحة.');
+                    throw new Error('فایلی JSON دروست نییە');
                 }
-                showMessage('تم تحميل قائمة الأرشيفات بنجاح. جاهز للبحث.', 'success');
+                showMessage('ئامادەیە بۆ گەڕان ✓', 'success');
+                setTimeout(() => {
+                    statusMessages.innerHTML = '';
+                }, 2500);
             } catch (error) {
-                console.error("خطأ في تحميل أو تحليل ملف JSON:", error);
-                showMessage(`فشل تحميل قائمة الأرشيفات: ${error.message}`, 'error');
+                showMessage(`هەڵە: ${error.message}`, 'error');
                 allGameArchives = [];
             }
         };
 
-        function showMessage(message, type = 'info') {
-            messageArea.textContent = message;
-            messageArea.className = type;
-            messageArea.style.display = message ? 'block' : 'none';
-        }
-
         function searchArchives() {
             resultsDiv.innerHTML = '';
-            if (allGameArchives.length === 0 && !messageArea.classList.contains('error')) {
-                 showMessage('قائمة الأرشيفات لم يتم تحميلها بعد أو فارغة.', 'error');
-                 return;
+            
+            if (allGameArchives.length === 0) {
+                showMessage('لیستی ئەرشیفەکان بەردەست نییە', 'error');
+                return;
             }
 
             const rawInput = gameIdInput.value.trim().toUpperCase();
             if (!rawInput) {
-                showMessage('الرجاء إدخال معرف لعبة واحد على الأقل للبحث.', 'error');
+                showMessage('تکایە ناسنامەیەک بنووسە', 'error');
                 return;
             }
 
             const idsToSearch = rawInput.split('\n').map(id => id.trim()).filter(id => id);
-            
             let foundArchives = [];
             
             idsToSearch.forEach(idToSearch => {
@@ -322,33 +1092,34 @@
             });
 
             if (foundArchives.length > 0) {
-                showMessage(`تم العثور على ${foundArchives.length} نتيجة/نتائج مطابقة:`, 'info');
-                foundArchives.forEach(archiveEntry => {
-                    const archiveFilename = archiveEntry.archiveFile; 
+                showMessage(`${foundArchives.length} ئەنجام دۆزرایەوە ✓`, 'success');
+                foundArchives.forEach((archiveEntry, index) => {
                     const link = document.createElement('a');
-                    link.href = `${zipArchivesBaseUrl}${archiveFilename}`; 
-                    link.download = archiveFilename; 
-                    link.innerHTML = `<i class="fas fa-download"></i>تحميل ${archiveFilename}`; 
-                    link.className = 'download-link'; 
-                    link.title = `انقر لتحميل ملف الأرشيف: ${archiveFilename}`;
+                    link.href = `${zipArchivesBaseUrl}${archiveEntry.archiveFile}`;
+                    link.download = archiveEntry.archiveFile;
+                    link.innerHTML = `
+                        <i class="fas fa-download"></i>
+                        <span>داگرتنی ${archiveEntry.archiveFile}</span>
+                    `;
+                    link.className = 'download-link';
+                    link.style.animationDelay = `${index * 0.1}s`;
                     resultsDiv.appendChild(link);
                 });
             } else {
-                showMessage('لم يتم العثور على أرشيفات صور تطابق المعرفات المدخلة.', 'info');
+                showMessage('هیچ ئەنجامێک نەدۆزرایەوە', 'error');
             }
         }
-
-        gameIdInput.addEventListener('keypress', function(event) {
-            if (event.key === 'Enter' && !event.shiftKey) {
-                // This part is kept empty to allow 'Enter' for new lines.
-            }
-        });
 
         gameIdInput.addEventListener('input', function() {
             this.style.height = 'auto';
             this.style.height = (this.scrollHeight) + 'px';
         });
 
+        gameIdInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter' && event.ctrlKey) {
+                searchArchives();
+            }
+        });
     </script>
 </body>
 </html>

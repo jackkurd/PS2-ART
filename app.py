@@ -4,7 +4,7 @@ import tempfile
 import shutil
 from flask import Flask, request, jsonify, send_from_directory, abort
 
-# --- الإعدادات ---
+# --- ڕێکخستنەکان ---
 SOURCE_DIR = 'ps2_covers' 
 OUTPUT_DIR = 'generated_files' 
 # ------------------
@@ -13,7 +13,7 @@ app = Flask(__name__, static_folder=None)
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 if not os.path.isdir(SOURCE_DIR):
-    print(f"تحذير: مجلد المصدر '{SOURCE_DIR}' غير موجود.")
+    print(f"ئاگاداری: بوخچەی سەرچاوە '{SOURCE_DIR}' بوونی نییە.")
 
 @app.route('/')
 def index():
@@ -28,20 +28,20 @@ def serve_static(path):
 @app.route('/rename-and-zip', methods=['POST'])
 def rename_and_zip():
     if not request.is_json:
-        return jsonify({"success": False, "error": "Request must be JSON"}), 400
+        return jsonify({"success": False, "error": "داواکارییەکە دەبێت JSON بێت"}), 400
 
     data = request.get_json()
     original_id = data.get('original_id')
     new_id = data.get('new_id')
 
     if not original_id or not new_id:
-        return jsonify({"success": False, "error": "Original and new ID are required"}), 400
+        return jsonify({"success": False, "error": "ناسنامەی سەرەتایی و نوێ پێویستن"}), 400
 
     original_zip_filename = f"{original_id}.zip"
     original_zip_path = os.path.join(SOURCE_DIR, original_zip_filename)
 
     if not os.path.exists(original_zip_path):
-        return jsonify({"success": False, "error": f"Original file '{original_zip_filename}' not found"}), 404
+        return jsonify({"success": False, "error": f"فایلی سەرەتایی '{original_zip_filename}' نەدۆزرایەوە"}), 404
 
     try:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -63,8 +63,8 @@ def rename_and_zip():
             "filename": new_zip_filename_with_ext
         })
     except Exception as e:
-        print(f"An error occurred: {e}")
-        return jsonify({"success": False, "error": "An internal error occurred while processing the file"}), 500
+        print(f"هەڵەیەک ڕوویدا: {e}")
+        return jsonify({"success": False, "error": "هەڵەیەکی ناوخۆیی ڕوویدا لە کاتی پرۆسەکردنی فایلەکە"}), 500
 
 @app.route('/download/<filename>')
 def download_file(filename):

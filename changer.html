@@ -1,244 +1,949 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ckb" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أداة تغيير ID الصور</title>
+    <title>ئامرازی گۆڕینی ناسنامەی وێنەکان</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
     <style>
-        /* === استايل مأخوذ من الموقع الرئيسي === */
-        body {
-            font-family: 'Cairo', sans-serif;
+        :root {
+            --primary: #0A84FF;
+            --secondary: #5E5CE6;
+            --success: #32D74B;
+            --danger: #FF453A;
+            --warning: #FF9F0A;
+            --purple: #BF5AF2;
+            --pink: #FF2D55;
+            --indigo: #5856D6;
+            
+            --glass-bg: rgba(30, 30, 32, 0.72);
+            --glass-border: rgba(255, 255, 255, 0.125);
+            --text-primary: #FFFFFF;
+            --text-secondary: #E5E5EA;
+            --text-tertiary: #AEAEB2;
+        }
+
+        * {
             margin: 0;
-            background-color: #000000;
-            color: #c8c8c8;
-            text-align: center;
-            line-height: 1.7;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000000;
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--purple), transparent);
+            top: -10%;
+            right: -10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--danger), transparent);
+            bottom: -10%;
+            left: -5%;
+            animation-delay: 5s;
+        }
+
+        .orb-3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, var(--indigo), transparent);
+            top: 40%;
+            left: 30%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(50px, -50px) scale(1.1);
+            }
+            50% {
+                transform: translate(-30px, 50px) scale(0.9);
+            }
+            75% {
+                transform: translate(-50px, -30px) scale(1.05);
+            }
+        }
+
+        /* Stars */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle 4s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
         }
 
         #page-container {
-            background-color: #1a1a1a;
-            padding: clamp(20px, 5vw, 40px);
-            box-sizing: border-box;
-            min-height: 100vh;
-        }
-        
-        .content-wrapper {
-            max-width: 800px;
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
             margin: 0 auto;
+            padding: 40px 24px 80px;
         }
 
-        h1 {
-            color: #33A1FF;
-            margin-bottom: 20px;
-            font-size: clamp(1.8em, 5vw, 2.5em);
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            margin-bottom: 50px;
+            perspective: 1000px;
+        }
+
+        .tool-logo {
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, var(--purple) 0%, var(--pink) 100%);
+            border-radius: 26px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-        }
-        
-        .nav-link-btn {
-            display: inline-block;
-            background-color: #ff3333;
+            font-size: 55px;
             color: white;
-            padding: 12px 30px;
-            border-radius: 6px;
+            transform-style: preserve-3d;
+            animation: magicFloat 6s ease-in-out infinite, fadeInScale 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 
+                0 20px 60px rgba(191, 90, 242, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            position: relative;
+        }
+
+        .tool-logo::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            background: linear-gradient(135deg, var(--pink), var(--purple), var(--indigo));
+            border-radius: 29px;
+            z-index: -1;
+            filter: blur(25px);
+            opacity: 0.7;
+            animation: rotateBorder 8s linear infinite;
+        }
+
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) rotateY(180deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotateY(0deg);
+            }
+        }
+
+        @keyframes magicFloat {
+            0%, 100% {
+                transform: rotateY(0deg) rotateX(0deg) translateY(0);
+            }
+            25% {
+                transform: rotateY(15deg) rotateX(10deg) translateY(-15px);
+            }
+            50% {
+                transform: rotateY(0deg) rotateX(15deg) translateY(0);
+            }
+            75% {
+                transform: rotateY(-15deg) rotateX(10deg) translateY(-15px);
+            }
+        }
+
+        @keyframes rotateBorder {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .hero-title {
+            font-size: clamp(2em, 5vw, 3em);
+            font-weight: 900;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--purple), var(--pink), var(--indigo));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 5s ease infinite, fadeInUp 0.8s ease 0.2s both;
+            letter-spacing: -1px;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.2em;
+            color: var(--text-secondary);
+            font-weight: 500;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        /* Navigation Button */
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--danger) 0%, #d92b20 100%);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.1em;
+            font-weight: 700;
+            font-family: 'Tajawal', sans-serif;
             text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1em;
-            margin-bottom: 30px;
-            transition: background-color 0.3s ease;
-        }
-        .nav-link-btn:hover {
-            background-color: #d62b2b;
-            color: white;
-        }
-        .nav-link-btn i {
-            margin-left: 8px;
+            cursor: pointer;
+            margin-bottom: 40px;
+            box-shadow: 
+                0 12px 32px rgba(255, 69, 58, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: fadeInUp 0.8s ease 0.6s both;
+            position: relative;
+            overflow: hidden;
         }
 
-        .changer-container {
-            background-color: #262626;
-            padding: 30px;
-            border-radius: 5px;
-        }
-        
-        .input-group {
-            margin-bottom: 25px;
-            text-align: right;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 700;
-            font-size: 1.1em;
-            color: #E0E0E0;
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
         }
 
-        .input-field {
-            padding: 12px;
-            border: 1px solid #444;
-            border-radius: 4px;
+        .nav-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 
+                0 20px 50px rgba(255, 69, 58, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            padding: 36px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            animation: slideInUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 30px 80px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
             width: 100%;
-            box-sizing: border-box;
-            background-color: #333333;
-            color: #ffffff;
-            font-size: 1.05em;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
         }
-        
-        .file-label {
+
+        .glass-card:hover::before {
+            left: 100%;
+        }
+
+        /* Input Group */
+        .input-group {
+            margin-bottom: 32px;
+            animation: fadeInUp 0.5s ease both;
+        }
+
+        .input-label {
             display: flex;
             align-items: center;
-            gap: 10px;
-            width: 100%;
-            padding: 12px;
-            border: 2px dashed #444;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s;
-            background-color: #333;
-            box-sizing: border-box;
+            gap: 14px;
+            margin-bottom: 14px;
+            font-weight: 700;
+            font-size: 1.2em;
+            color: var(--text-primary);
         }
 
-        .file-label:hover {
-            border-color: #007bff;
-            background-color: #3a3a3a;
+        .step-badge {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--purple), var(--pink));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 900;
+            font-size: 1em;
+            box-shadow: 0 6px 18px rgba(191, 90, 242, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 6px 18px rgba(191, 90, 242, 0.4);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 8px 24px rgba(191, 90, 242, 0.6);
+            }
+        }
+
+        /* Input Field */
+        .input-field {
+            width: 100%;
+            padding: 18px 22px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            color: var(--text-primary);
+            font-size: 1.1em;
+            font-family: 'Tajawal', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--purple);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 4px rgba(191, 90, 242, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .input-field::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        /* File Upload Zone */
+        .upload-zone {
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        .file-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 48px 32px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 3px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .file-upload::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(191, 90, 242, 0.1), rgba(255, 45, 85, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .file-upload:hover::before {
+            opacity: 1;
+        }
+
+        .file-upload:hover {
+            border-color: var(--purple);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(191, 90, 242, 0.2);
+        }
+
+        .file-upload.drag-over {
+            border-color: var(--success);
+            background: rgba(50, 215, 75, 0.1);
+            transform: scale(1.02);
+        }
+
+        .upload-icon {
+            font-size: 4em;
+            color: var(--purple);
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .upload-text {
+            font-size: 1.15em;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        .upload-hint {
+            font-size: 0.95em;
+            color: var(--text-tertiary);
+        }
+
+        .file-status {
+            margin-top: 12px;
+            padding: 12px 20px;
+            background: rgba(50, 215, 75, 0.15);
+            border: 1px solid rgba(50, 215, 75, 0.3);
+            border-radius: 12px;
+            color: var(--success);
+            font-weight: 600;
+            text-align: center;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         input[type="file"] {
             display: none;
         }
 
+        /* Buttons */
         .btn {
-            padding: 12px 25px;
-            background-color: #007bff;
-            color: white;
+            width: 100%;
+            padding: 18px 36px;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-size: 1.1em;
+            border-radius: 16px;
+            font-size: 1.15em;
             font-weight: 700;
+            font-family: 'Tajawal', sans-serif;
+            cursor: pointer;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            width: 100%;
-            margin-top: 10px;
+            gap: 14px;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+            margin-top: 12px;
         }
 
-        .btn:hover {
-            background-color: #0056b3;
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
         }
 
-        .btn-success {
-            background-color: #28a745;
+        .btn:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .btn-process {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 
+                0 12px 32px rgba(10, 132, 255, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-process:hover:not(:disabled) {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 
+                0 20px 50px rgba(10, 132, 255, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-process:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-download {
+            background: linear-gradient(135deg, var(--success), #28a745);
+            color: white;
+            box-shadow: 
+                0 12px 32px rgba(50, 215, 75, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
             display: none;
         }
-        .btn-success:hover {
-            background-color: #218838;
-        }
-        
-        .status-container {
-            margin-top: 20px;
-            min-height: 25px;
-            font-size: 1.15em;
-            font-weight: bold;
-        }
-        .error { color: #ff6666; }
-        .loading { color: #f0f0f0; }
-        .success { color: #66ff66; }
 
-        /* === تنسيق صندوق التعليمات المضاف حديثاً === */
-        .instructions {
-            text-align: right;
-            margin-top: 30px;
-            padding: 30px;
-            background-color: #262626;
-            border-radius: 5px;
-        }
-        .instructions h3 {
-            margin-top: 0;
-            margin-bottom: 15px;
-            color: #E0E0E0;
-        }
-        .instructions ol {
-            padding-right: 20px;
-            margin-bottom: 0;
-            line-height: 2;
-        }
-        .instructions li {
-            margin-bottom: 10px;
+        .btn-download:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 
+                0 20px 50px rgba(50, 215, 75, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.2);
         }
 
+        .btn i,
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Status */
+        .status-area {
+            margin-top: 28px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .status-message {
+            padding: 16px 28px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 1.05em;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .status-error {
+            background: rgba(255, 69, 58, 0.15);
+            color: var(--danger);
+            border: 2px solid rgba(255, 69, 58, 0.3);
+        }
+
+        .status-loading {
+            background: rgba(10, 132, 255, 0.15);
+            color: var(--primary);
+            border: 2px solid rgba(10, 132, 255, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .status-success {
+            background: rgba(50, 215, 75, 0.15);
+            color: var(--success);
+            border: 2px solid rgba(50, 215, 75, 0.3);
+        }
+
+        /* Instructions */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 28px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--purple), var(--pink));
+            animation: expandWidth 1s ease forwards;
+        }
+
+        @keyframes expandWidth {
+            from { width: 0; }
+            to { width: 120px; }
+        }
+
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--purple), var(--pink));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: white;
+            box-shadow: 0 8px 20px rgba(191, 90, 242, 0.3);
+            animation: rotateIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes rotateIn {
+            0% {
+                transform: scale(0) rotate(-180deg);
+            }
+            50% {
+                transform: scale(1.2) rotate(10deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .section-title {
+            font-size: 1.6em;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .instructions-list {
+            list-style: none;
+            counter-reset: step;
+            padding: 0;
+        }
+
+        .instruction-item {
+            counter-increment: step;
+            position: relative;
+            padding: 18px 24px 18px 70px;
+            margin-bottom: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            color: var(--text-secondary);
+            font-size: 1.05em;
+            line-height: 1.8;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.5s ease both;
+        }
+
+        .instruction-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--purple);
+            transform: translateX(-8px);
+            box-shadow: 0 8px 24px rgba(191, 90, 242, 0.2);
+        }
+
+        .instruction-item::before {
+            content: counter(step);
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--purple), var(--pink));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 900;
+            font-size: 1.1em;
+            box-shadow: 0 4px 12px rgba(191, 90, 242, 0.3);
+        }
+
+        .instruction-item strong {
+            color: var(--text-primary);
+            font-weight: 800;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            #page-container {
+                padding: 24px 16px 60px;
+            }
+
+            .glass-card {
+                padding: 28px;
+                border-radius: 24px;
+            }
+
+            .hero-title {
+                font-size: 2em;
+            }
+
+            .tool-logo {
+                width: 95px;
+                height: 95px;
+                font-size: 48px;
+            }
+
+            .btn {
+                padding: 16px 32px;
+                font-size: 1em;
+            }
+
+            .file-upload {
+                padding: 40px 24px;
+            }
+
+            .upload-icon {
+                font-size: 3em;
+            }
+
+            .instruction-item {
+                padding: 16px 20px 16px 66px;
+            }
+
+            .instruction-item::before {
+                width: 38px;
+                height: 38px;
+                font-size: 1em;
+            }
+        }
+
+        /* Stagger animation */
+        .input-group:nth-child(1) { animation-delay: 0.1s; }
+        .input-group:nth-child(2) { animation-delay: 0.2s; }
+        .input-group:nth-child(3) { animation-delay: 0.3s; }
+
+        .instruction-item:nth-child(1) { animation-delay: 0.1s; }
+        .instruction-item:nth-child(2) { animation-delay: 0.2s; }
+        .instruction-item:nth-child(3) { animation-delay: 0.3s; }
+        .instruction-item:nth-child(4) { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Stars -->
+    <div class="stars" id="stars"></div>
+
     <div id="page-container">
-        <div class="content-wrapper">
-            <h1><i class="fas fa-retweet"></i>أداة تغيير ID الصور</h1>
+        <!-- Hero -->
+        <div class="hero-section">
+            <div class="tool-logo">
+                <i class="fas fa-wand-magic-sparkles"></i>
+            </div>
+            <h1 class="hero-title">ئامرازی گۆڕینی ناسنامە</h1>
+            <p class="hero-subtitle">گۆڕینی ناسنامەی وێنەکان بە جادو</p>
+        </div>
 
-            <a href="./index.html" class="nav-link-btn" target="_blank" rel="noopener noreferrer">
-                <i class="fas fa-home"></i>
-                العودة لموقع تحميل الصور
+        <div style="text-align: center;">
+            <a href="./index.html" class="nav-btn">
+                <i class="fas fa-arrow-right"></i>
+                <span>گەڕانەوە بۆ ماڵپەڕ</span>
             </a>
+        </div>
 
-            <div class="changer-container">
+        <!-- Main Tool -->
+        <div class="glass-card" style="animation-delay: 0.2s;">
+            <form id="changerForm">
                 <div class="input-group">
-                    <label for="changerGameIdInput"><i class="fas fa-id-card"></i>1. أدخل ID الجديد:</label>
-                    <input type="text" id="changerGameIdInput" class="input-field" placeholder="مثال: SLUS_123.45">
-                </div>
-                 <div class="input-group">
-                    <label for="anyFiles"><i class="fas fa-folder-open"></i>2. اختر الملفات (ملف أو أكثر):</label>
-                    <label for="anyFiles" class="file-label">
-                        <i class="fas fa-paperclip"></i>
-                        <span id="file-name-span">اختر الملفات...</span>
+                    <label for="changerGameIdInput" class="input-label">
+                        <span class="step-badge">١</span>
+                        <span>ناسنامەی نوێ بنووسە</span>
                     </label>
-                    <input type="file" id="anyFiles" multiple>
-                 </div>
-                <button id="processButton" class="btn"><i class="fas fa-cogs"></i>معالجة وتجهيز</button>
-                <button id="downloadButton" class="btn btn-success"><i class="fas fa-download"></i>تحميل الملف</button>
-                <div class="status-container"><p id="changer-status"></p></div>
-            </div>
+                    <input 
+                        type="text" 
+                        id="changerGameIdInput" 
+                        class="input-field" 
+                        placeholder="نموونە: SLUS_219.27"
+                        required
+                    >
+                </div>
 
-            <div class="instructions">
-                <h3><i class="fas fa-info-circle"></i> كيفية استخدام الأداة:</h3>
-                <ol>
-                    <li><strong>إدخال المعرف الجديد:</strong> في الخانة الأولى، اكتب الـ ID الجديد الذي تريد تطبيقه على الصور.</li>
-                    <li><strong>اختيار الصور:</strong> اضغط على خانة اختيار الملفات لاختيار صورة واحدة أو أكثر تريد تغيير اسمها.</li>
-                    <li><strong>المعالجة:</strong> اضغط على زر "معالجة وتجهيز".</li>
-                    <li><strong>التحميل:</strong> بعد انتهاء المعالجة، سيظهر زر "تحميل الملف". اضغط عليه لتحميل ملف ZIP الذي يحتوي على صورك بالأسماء الجديدة.</li>
-                </ol>
-            </div>
+                <div class="input-group">
+                    <label class="input-label">
+                        <span class="step-badge">٢</span>
+                        <span>وێنەکان هەڵبژێرە</span>
+                    </label>
+                    <div class="upload-zone">
+                        <label for="anyFiles" class="file-upload" id="fileUploadZone">
+                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                            <div class="upload-text">کرتە بکە یان وێنەکان ڕابکێشە</div>
+                            <div class="upload-hint">دەتوانیت چەند وێنەیەک پێکەوە هەڵبژێریت</div>
+                        </label>
+                        <input type="file" id="anyFiles" multiple accept="image/*" required>
+                        <div class="file-status" id="fileStatus"></div>
+                    </div>
+                </div>
 
+                <button type="button" id="processButton" class="btn btn-process">
+                    <i class="fas fa-magic"></i>
+                    <span>دەستپێکردنی جادو</span>
+                </button>
+
+                <button type="button" id="downloadButton" class="btn btn-download">
+                    <i class="fas fa-download"></i>
+                    <span>داگرتنی فایل</span>
+                </button>
+            </form>
+
+            <div class="status-area">
+                <div id="statusMessage"></div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="glass-card" style="animation-delay: 0.4s;">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h3 class="section-title">ڕێنمایی بەکارهێنان</h3>
+            </div>
+            
+            <ol class="instructions-list">
+                <li class="instruction-item">
+                    <strong>ناسنامەی نوێ:</strong> 
+                    تەنها ناسنامەی بنەڕەتی بنووسە (نموونە: SLUS_219.27) - بەشی _COV یان _ICO خۆکار زیاد دەکرێت
+                </li>
+                <li class="instruction-item">
+                    <strong>هەڵبژاردنی وێنە:</strong> 
+                    کرتە لەسەر خانەکە بکە یان وێنەکان ڕابکێشە - دەتوانیت چەندین وێنە پێکەوە هەڵبژێریت
+                </li>
+                <li class="instruction-item">
+                    <strong>پرۆسەکردن:</strong> 
+                    کرتە لەسەر دوگمەی "دەستپێکردنی جادو" بکە بۆ گۆڕینی ناوەکان
+                </li>
+                <li class="instruction-item">
+                    <strong>داگرتن:</strong> 
+                    دوای تەواوبوون، دوگمەی داگرتن دەردەکەوێت - کرتە لەسەری بکە بۆ وەرگرتنی فایلی ZIP
+                </li>
+            </ol>
         </div>
     </div>
 
     <script>
+        // Create twinkling stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 50; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 4 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Main script
         (function() {
             let zipContent = null;
             const gameIdInput = document.getElementById('changerGameIdInput');
             const filesInput = document.getElementById('anyFiles');
-            const statusEl = document.getElementById('changer-status');
+            const fileUploadZone = document.getElementById('fileUploadZone');
+            const fileStatus = document.getElementById('fileStatus');
+            const statusMessage = document.getElementById('statusMessage');
             const processButton = document.getElementById('processButton');
             const downloadButton = document.getElementById('downloadButton');
-            const fileNameSpan = document.getElementById('file-name-span');
 
-            function showChangerMessage(message, type) {
-                statusEl.textContent = message;
-                statusEl.className = type;
+            function showStatus(message, type) {
+                statusMessage.innerHTML = `<div class="status-message status-${type}">${message}</div>`;
             }
 
-            function resetChangerUI() {
-                showChangerMessage('', 'loading');
+            function resetUI() {
+                statusMessage.innerHTML = '';
                 zipContent = null;
                 downloadButton.style.display = 'none';
                 processButton.style.display = 'inline-flex';
@@ -248,65 +953,123 @@
             function processFiles() {
                 const gameId = gameIdInput.value.trim();
                 const files = filesInput.files;
-                if (!gameId) { alert('الرجاء إدخال ID الجديد.'); return; }
-                if (files.length === 0) { alert('الرجاء اختيار ملف واحد على الأقل.'); return; }
+                
+                if (!gameId) {
+                    showStatus('تکایە ناسنامەی نوێ بنووسە', 'error');
+                    return;
+                }
+                
+                if (files.length === 0) {
+                    showStatus('تکایە لانیکەم یەک وێنە هەڵبژێرە', 'error');
+                    return;
+                }
 
                 processButton.disabled = true;
-                showChangerMessage('جاري المعالجة...', 'loading');
+                showStatus('جادو دەکرێت... ⭐', 'loading');
 
                 setTimeout(() => {
                     const zip = new JSZip();
+                    
                     Array.from(files).forEach(file => {
                         const originalName = file.name;
                         const extension = originalName.slice(originalName.lastIndexOf('.'));
+                        
+                        // Extract the suffix part after the second underscore
+                        // Example: "SLUS_219.27_COV.png" -> "_COV"
                         const nameWithoutExt = originalName.slice(0, originalName.lastIndexOf('.'));
-                        const firstUnderscoreIndex = nameWithoutExt.indexOf('_');
-                        let secondUnderscoreIndex = (firstUnderscoreIndex !== -1) ? nameWithoutExt.indexOf('_', firstUnderscoreIndex + 1) : -1;
-                        let newName = (secondUnderscoreIndex !== -1)
-                            ? gameId + nameWithoutExt.substring(secondUnderscoreIndex) + extension
-                            : originalName;
+                        const parts = nameWithoutExt.split('_');
+                        
+                        let newName;
+                        if (parts.length >= 3) {
+                            // Has suffix like _COV or _ICO
+                            const suffix = '_' + parts.slice(2).join('_');
+                            newName = gameId + suffix + extension;
+                        } else {
+                            // No suffix, keep original name
+                            newName = gameId + extension;
+                        }
+                        
                         zip.file(newName, file, { compression: "STORE" });
                     });
+                    
                     zip.generateAsync({ type: "blob" })
                         .then(content => {
                             zipContent = content;
-                            showChangerMessage('تم! الملف جاهز للتحميل.', 'success');
+                            showStatus('جادوەکە تەواو بوو! ✨ فایلەکە ئامادەیە بۆ داگرتن', 'success');
                             processButton.style.display = 'none';
                             downloadButton.style.display = 'inline-flex';
                         })
                         .catch(err => {
-                            showChangerMessage(`حدث خطأ: ${err.message}`, 'error');
+                            showStatus(`هەڵەیەک ڕوویدا: ${err.message}`, 'error');
                             processButton.disabled = false;
                         });
-                }, 200);
+                }, 800);
             }
 
             function downloadZip() {
-                 if (zipContent) {
+                if (zipContent) {
                     const gameId = gameIdInput.value.trim();
-                    if (!gameId) { alert('ID فارغ، لا يمكن إنشاء اسم للملف.'); return; }
+                    if (!gameId) {
+                        showStatus('ناسنامە بەتاڵە', 'error');
+                        return;
+                    }
+                    
                     const link = document.createElement('a');
                     link.href = URL.createObjectURL(zipContent);
                     link.download = `${gameId}.zip`;
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
-                    showChangerMessage('تم تحميل الملف، ستجده في مجلد التنزيلات (Downloads).', 'success');
+                    
+                    showStatus('فایلەکە دەرکرا - لە Downloads دەیدۆزیتەوە ✓', 'success');
                 }
             }
 
-            gameIdInput.addEventListener('input', resetChangerUI);
+            // Drag and drop
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                fileUploadZone.addEventListener(eventName, e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }, false);
+            });
+
+            ['dragenter', 'dragover'].forEach(eventName => {
+                fileUploadZone.addEventListener(eventName, () => {
+                    fileUploadZone.classList.add('drag-over');
+                }, false);
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+                fileUploadZone.addEventListener(eventName, () => {
+                    fileUploadZone.classList.remove('drag-over');
+                }, false);
+            });
+
+            fileUploadZone.addEventListener('drop', e => {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+                filesInput.files = files;
+                
+                const event = new Event('change', { bubbles: true });
+                filesInput.dispatchEvent(event);
+            }, false);
+
+            gameIdInput.addEventListener('input', resetUI);
+            
             filesInput.addEventListener('change', () => {
-                resetChangerUI();
+                resetUI();
                 const count = filesInput.files.length;
-                if (count === 1) {
-                    fileNameSpan.textContent = 'ملف واحد تم اختياره';
-                } else if (count > 1) {
-                    fileNameSpan.textContent = `${count} ملفات تم اختيارها`;
+                if (count > 0) {
+                    const text = count === 1 
+                        ? '✓ یەک وێنە هەڵبژێردرا' 
+                        : `✓ ${count} وێنە هەڵبژێردران`;
+                    fileStatus.textContent = text;
+                    fileStatus.style.display = 'block';
                 } else {
-                    fileNameSpan.textContent = 'اختر الملفات...';
+                    fileStatus.style.display = 'none';
                 }
             });
+            
             processButton.addEventListener('click', processFiles);
             downloadButton.addEventListener('click', downloadZip);
         })();
